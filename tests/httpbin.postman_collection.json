@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "dbfeddde-33a5-4e61-a4ac-52551233eb35",
+		"name": "httpbin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetUUID Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "12108274-1e61-4713-9c95-07e97d30d6ee",
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});let response=pm.response.json();",
+							"//pm.globals.set(\"uuid\", response.uuid);",
+							"",
+							"pm.environment.set(\"uuid\", response.uuid);",
+							"pm.test(\"test\", function () {",
+							"    ",
+							"    pm.expect('app').to.be.oneOf(['bb','app']);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/uuid",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"uuid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b20f2a6-2a7d-4d2c-ad57-f719f07e1b89",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"John\",\n\t\"email\":\"John@example.com\",\n\t\"id\":\"{{uuid}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://httpbin.org/post",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
